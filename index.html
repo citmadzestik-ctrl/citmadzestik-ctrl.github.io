@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gmail · Вход</title>
-    <!-- Шрифт и иконки Google (Material Symbols) для максимального сходства -->
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0,1" />
+    <title>Gmail</title>
     <style>
         * {
             margin: 0;
@@ -15,382 +12,276 @@
         }
 
         body {
-            background-color: #ffffff;
-            font-family: 'Google Sans', 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #ffffff;
+            font-family: 'Google Sans', Roboto, Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
-            padding: 16px;
+            padding: 20px;
         }
 
-        /* основной карточный контейнер – точная копия стиля Google */
         .card {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
             max-width: 448px;
             width: 100%;
+            background: #ffffff;
             padding: 48px 40px 36px;
-            transition: box-shadow 0.2s;
+            border-radius: 8px;
             border: 1px solid #dadce0;
         }
 
-        /* логотип Google / Gmail */
+        /* Логотип */
         .logo {
             display: flex;
             align-items: center;
+            gap: 10px;
             margin-bottom: 28px;
-            gap: 8px;
         }
 
         .logo svg {
-            display: block;
-            height: 32px;
             width: 32px;
+            height: 32px;
+            flex-shrink: 0;
         }
 
         .logo-text {
             font-size: 22px;
-            font-weight: 400;
             color: #1f1f1f;
-            letter-spacing: 0.2px;
-            line-height: 1.2;
+            font-weight: 400;
+            letter-spacing: -0.2px;
         }
 
-        /* заголовок */
+        /* Заголовок Sign in */
         .title {
             font-size: 24px;
+            color: #202124;
             font-weight: 400;
-            color: #1f1f1f;
-            margin-bottom: 8px;
             line-height: 1.333;
+            margin-bottom: 8px;
         }
 
+        /* Подзаголовок */
         .subtitle {
             font-size: 16px;
-            font-weight: 400;
             color: #3c4043;
-            margin-bottom: 28px;
             line-height: 1.5;
+            margin-bottom: 28px;
+            font-weight: 400;
         }
 
-        .subtitle span {
-            display: inline-block;
-        }
-
-        /* поле ввода */
-        .input-group {
-            margin-bottom: 12px;
-            position: relative;
-        }
-
-        .input-group input {
+        /* Поле Email or phone */
+        .input-field {
             width: 100%;
-            padding: 14px 16px;
+            height: 56px;
+            padding: 0 16px;
             font-size: 16px;
-            font-family: 'Google Sans', 'Segoe UI', Roboto, Arial, sans-serif;
-            background: #ffffff;
+            font-family: 'Google Sans', Roboto, Arial, sans-serif;
             border: 1px solid #dadce0;
             border-radius: 4px;
             outline: none;
             color: #202124;
-            transition: border 0.2s;
-            height: 56px;
+            background: #ffffff;
+            margin-bottom: 4px;
         }
 
-        .input-group input:focus {
+        .input-field:focus {
             border-color: #1a73e8;
             border-width: 2px;
-            padding: 13px 15px; /* смещение для компенсации толщины */
+            padding: 0 15px;
         }
 
-        .input-group input::placeholder {
+        .input-field::placeholder {
             color: #5f6368;
             font-weight: 400;
-            opacity: 1;
         }
 
-        /* ссылка "Forgot email?" */
-        .forgot-email {
-            display: block;
-            text-align: left;
+        /* Forgot email? */
+        .forgot-link {
+            display: inline-block;
             font-size: 14px;
             font-weight: 500;
             color: #1a73e8;
             text-decoration: none;
             margin: 8px 0 24px 0;
-            letter-spacing: 0.3px;
         }
 
-        .forgot-email:hover {
+        .forgot-link:hover {
             text-decoration: underline;
-            cursor: pointer;
         }
 
-        /* гостевая подпись и чекбокс (в точности как на скрине) */
+        /* Guest секция */
         .guest-section {
             display: flex;
-            align-items: flex-start;
             gap: 14px;
             margin-bottom: 32px;
+            align-items: flex-start;
         }
 
-        .guest-section .checkbox {
-            margin-top: 2px;
+        .guest-checkbox {
             width: 18px;
             height: 18px;
+            margin-top: 2px;
             accent-color: #1a73e8;
             flex-shrink: 0;
-            border-radius: 2px;
-            border: 1px solid #5f6368;
-            background: #ffffff;
             cursor: default;
         }
 
-        .guest-section .guest-text {
+        .guest-text {
             font-size: 14px;
             color: #3c4043;
             line-height: 1.5;
         }
 
-        .guest-section .guest-text .learn-more {
+        .guest-text .learn-more {
             color: #1a73e8;
-            font-weight: 500;
             text-decoration: none;
+            font-weight: 500;
         }
 
-        .guest-section .guest-text .learn-more:hover {
+        .guest-text .learn-more:hover {
             text-decoration: underline;
         }
 
-        /* нижняя панель: Create account + Next */
-        .action-row {
+        /* Кнопки внизу */
+        .actions {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-top: 4px;
-            flex-wrap: wrap;
-            row-gap: 16px;
         }
 
-        .create-account {
+        .create-btn {
             font-size: 14px;
             font-weight: 500;
             color: #1a73e8;
             background: none;
             border: none;
+            padding: 8px 4px;
             cursor: default;
-            padding: 8px 0;
-            letter-spacing: 0.3px;
-            font-family: 'Google Sans', 'Segoe UI', Roboto, Arial, sans-serif;
-        }
-
-        .create-account:hover {
-            background: rgba(26, 115, 232, 0.04);
-            border-radius: 4px;
+            font-family: 'Google Sans', Roboto, Arial, sans-serif;
         }
 
         .next-btn {
             background: #1a73e8;
+            color: #ffffff;
             border: none;
             border-radius: 4px;
             padding: 10px 24px;
             font-size: 14px;
             font-weight: 500;
-            font-family: 'Google Sans', 'Segoe UI', Roboto, Arial, sans-serif;
-            color: #ffffff;
+            font-family: 'Google Sans', Roboto, Arial, sans-serif;
             cursor: default;
-            letter-spacing: 0.3px;
-            transition: background 0.2s;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
 
-        .next-btn:hover {
-            background: #1b66c9;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
-        /* селектор языка / нижняя строка */
-        .footer-lang {
-            margin-top: 36px;
+        /* Язык */
+        .lang-selector {
+            margin-top: 32px;
+            padding-top: 22px;
+            border-top: 1px solid #dadce0;
+            font-size: 14px;
+            color: #3c4043;
             display: flex;
-            justify-content: flex-start;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .lang-selector .arrow {
+            font-size: 11px;
+            color: #5f6368;
+            margin-left: 2px;
+        }
+
+        /* ===== НИЖНИЕ ССЫЛКИ: Help · Privacy · Terms ===== */
+        .footer-links {
+            margin-top: 16px;
+            display: flex;
+            gap: 20px;
             font-size: 12px;
             color: #3c4043;
-            border-top: 1px solid #dadce0;
-            padding-top: 24px;
-            align-items: center;
-            gap: 4px;
-            flex-wrap: wrap;
         }
 
-        .footer-lang .lang-selector {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 500;
+        .footer-links a {
             color: #3c4043;
+            text-decoration: none;
         }
 
-        .footer-lang .lang-selector span {
-            letter-spacing: 0.2px;
-        }
-
-        .footer-lang .lang-selector .arrow {
-            font-size: 18px;
-            line-height: 1;
-            color: #5f6368;
-        }
-
-        /* поддельные элементы "Ножницы / скриншот" – в точности как на картинке */
-        .mock-screenshot-tools {
-            margin-top: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 24px;
-            font-size: 13px;
-            color: #3c4043;
-            border-top: 1px solid #e8eaed;
-            padding-top: 18px;
-            flex-wrap: wrap;
-        }
-
-        .mock-screenshot-tools .tool-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .mock-screenshot-tools .tool-item .icon {
-            font-size: 20px;
-            color: #5f6368;
-        }
-
-        .mock-screenshot-tools .divider {
-            width: 1px;
-            height: 20px;
-            background: #dadce0;
-        }
-
-        .mock-screenshot-tools .action-link {
-            color: #1a73e8;
-            font-weight: 500;
-            cursor: default;
-        }
-
-        /* дополнительный отступ для "English (United States)" */
-        .lang-display {
-            font-size: 14px;
-            font-weight: 400;
-            color: #3c4043;
-            letter-spacing: 0.2px;
-        }
-
-        /* маленькие правки для точного соответствия */
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-
-        .text-muted {
-            color: #5f6368;
-        }
-
-        /* сохраняем все отступы как в оригинале */
-        .spacer {
-            height: 2px;
+        .footer-links a:hover {
+            text-decoration: underline;
         }
 
         @media (max-width: 480px) {
             .card {
-                padding: 32px 24px 24px;
+                padding: 32px 20px 24px;
             }
-            .action-row {
+            .actions {
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 12px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <!-- Логотип + Gmail (как на скрине) -->
-        <div class="logo">
-            <!-- SVG логотипа Gmail (упрощённый но узнаваемый) -->
-            <svg viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0z" fill="#4285F4"/>
-                <path d="M12 3.6c-4.645 0-8.4 3.755-8.4 8.4 0 4.645 3.755 8.4 8.4 8.4 4.645 0 8.4-3.755 8.4-8.4 0-4.645-3.755-8.4-8.4-8.4zm0 14.4c-3.314 0-6-2.686-6-6s2.686-6 6-6 6 2.686 6 6-2.686 6-6 6z" fill="#FFFFFF"/>
-                <path d="M17.4 12c0 2.982-2.418 5.4-5.4 5.4S6.6 14.982 6.6 12 9.018 6.6 12 6.6s5.4 2.418 5.4 5.4z" fill="#34A853"/>
-                <path d="M12 7.2v4.8l3.6 2.4-1.2-3.6 3.6-1.2-3.6-2.4 1.2-3.6z" fill="#FBBC05"/>
-                <path d="M12 16.8V12l-3.6-2.4 1.2 3.6-3.6 1.2 3.6 2.4-1.2 3.6z" fill="#EA4335"/>
-            </svg>
-            <span class="logo-text">Gmail</span>
-        </div>
 
-        <!-- Заголовки -->
-        <div class="title">Sign in</div>
-        <div class="subtitle">
-            <span>with your Google Account to continue to Gmail. This account will be available to other Google apps in the browser.</span>
-        </div>
+<div class="card">
 
-        <!-- Поле Email / phone -->
-        <div class="input-group">
-            <input type="text" placeholder="Email or phone" value="">
-        </div>
-
-        <!-- Forgot email? -->
-        <a href="#" class="forgot-email">Forgot email?</a>
-
-        <!-- Гостевая секция (точная копия) -->
-        <div class="guest-section">
-            <input type="checkbox" class="checkbox" checked>
-            <div class="guest-text">
-                Not your computer? Use Guest mode to sign in privately.
-                <a href="#" class="learn-more">Learn more about using Guest mode</a>
-            </div>
-        </div>
-
-        <!-- Нижняя панель: Create account + Next -->
-        <div class="action-row">
-            <div class="create-account">Create account</div>
-            <button class="next-btn">Next</button>
-        </div>
-
-        <!-- Доп. элементы: языковой селектор и "Ножницы/скриншот" как на изображении -->
-        <div class="footer-lang">
-            <div class="lang-selector">
-                <span>English (United States)</span>
-                <span class="arrow">▼</span>
-            </div>
-        </div>
-
-        <!-- Блок "Ножницы", "Снимок экрана скопирован" и т.д. – полностью как на картинке -->
-        <div class="mock-screenshot-tools">
-            <div class="tool-item">
-                <span class="material-symbols-outlined icon">content_cut</span>
-                <span>Ножницы</span>
-            </div>
-            <div class="divider"></div>
-            <div class="tool-item">
-                <span class="material-symbols-outlined icon">content_copy</span>
-                <span>Снимок экрана скопирован в буфер обмена</span>
-            </div>
-            <div class="divider"></div>
-            <div class="tool-item">
-                <span class="material-symbols-outlined icon">folder_open</span>
-                <span>Автоматически сохраняются в папке снимков экрана.</span>
-            </div>
-            <div class="divider"></div>
-            <div class="tool-item action-link">
-                <span class="material-symbols-outlined icon">edit_note</span>
-                <span>Разметка и общий доступ</span>
-            </div>
-        </div>
-
-        <!-- тонкая лишняя строка, чтобы зафиксировать всё как на скрине (поскольку в оригинале снизу есть мелкие служебные элементы) -->
-        <div style="margin-top: 6px; font-size: 12px; color: #dadce0; height: 0; opacity: 0;">.</div>
+    <!-- Логотип -->
+    <div class="logo">
+        <svg viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0z" fill="#4285F4"/>
+            <path d="M12 3.6c-4.645 0-8.4 3.755-8.4 8.4 0 4.645 3.755 8.4 8.4 8.4 4.645 0 8.4-3.755 8.4-8.4 0-4.645-3.755-8.4-8.4-8.4zm0 14.4c-3.314 0-6-2.686-6-6s2.686-6 6-6 6 2.686 6 6-2.686 6-6 6z" fill="#FFFFFF"/>
+            <path d="M17.4 12c0 2.982-2.418 5.4-5.4 5.4S6.6 14.982 6.6 12 9.018 6.6 12 6.6s5.4 2.418 5.4 5.4z" fill="#34A853"/>
+            <path d="M12 7.2v4.8l3.6 2.4-1.2-3.6 3.6-1.2-3.6-2.4 1.2-3.6z" fill="#FBBC05"/>
+            <path d="M12 16.8V12l-3.6-2.4 1.2 3.6-3.6 1.2 3.6 2.4-1.2 3.6z" fill="#EA4335"/>
+        </svg>
+        <span class="logo-text">Gmail</span>
     </div>
+
+    <!-- Sign in -->
+    <div class="title">Sign in</div>
+
+    <!-- Поле Email or phone -->
+    <input class="input-field" type="text" placeholder="Email or phone">
+
+    <!-- Подзаголовок (под полем) -->
+    <div class="subtitle">
+        with your Google Account to continue to Gmail. This account<br>
+        will be available to other Google apps in the browser.
+    </div>
+
+    <!-- Forgot email? -->
+    <a href="#" class="forgot-link">Forgot email?</a>
+
+    <!-- Guest mode -->
+    <div class="guest-section">
+        <input class="guest-checkbox" type="checkbox" checked>
+        <div class="guest-text">
+            Not your computer? Use Guest mode to sign in privately. <a href="#" class="learn-more">Learn more</a><br>
+            about using Guest mode
+        </div>
+    </div>
+
+    <!-- Create account + Next -->
+    <div class="actions">
+        <span class="create-btn">Create account</span>
+        <button class="next-btn">Next</button>
+    </div>
+
+    <!-- English (United States) -->
+    <div class="lang-selector">
+        <span>English (United States)</span>
+        <span class="arrow">▼</span>
+    </div>
+
+    <!-- Help · Privacy · Terms -->
+    <div class="footer-links">
+        <a href="#">Help</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+    </div>
+
+</div>
+
 </body>
 </html>
