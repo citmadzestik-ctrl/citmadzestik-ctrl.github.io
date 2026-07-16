@@ -3,288 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход — Аккаунты Google</title>
+    <title>Example Domain</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
-            -webkit-font-smoothing: antialiased;
-        }
-
         body {
-            background-color: #131314;
-            color: #e3e3e3;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
         }
-
-        .main-container {
-            width: 100%;
-            max-width: 1040px;
-            padding: 24px;
-        }
-
-        /* Центрированная карточка авторизации */
-        .login-card {
-            background-color: #1f1f20;
-            border-radius: 24px;
-            padding: 40px;
-            display: flex;
-            gap: 48px;
-            min-height: 420px;
-        }
-
-        .left-column {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .google-logo {
-            margin-bottom: 24px;
-        }
-
         h1 {
-            font-size: 24px;
-            font-weight: 400;
-            color: #e3e3e3;
-            margin-bottom: 16px;
+            font-size: 28px;
+            margin-bottom: 10px;
         }
-
-        .description {
-            font-size: 16px;
-            line-height: 1.5;
-            color: #e3e3e3;
+        .domain {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 20px;
         }
-
-        .right-column {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding-top: 4px;
-        }
-
-        /* Стилизация фирменного инпута Google с плавающим текстом */
-        .input-group {
-            position: relative;
-            margin-bottom: 16px;
-            margin-top: 12px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 16px;
-            background: transparent;
-            border: 1px solid #8e918f;
-            border-radius: 4px;
-            color: #e3e3e3;
-            font-size: 16px;
-            outline: none;
-            transition: border-color 0.2s ease;
-        }
-
-        .input-group input:focus {
-            border-color: #a8c7fa;
-            border-width: 2px;
-            padding: 15px; /* Коррекция padding для компенсации толщины границы */
-        }
-
-        .input-group label {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: #1f1f20;
-            padding: 0 6px;
-            color: #c4c7c5;
-            transition: 0.15s cubic-bezier(0.4, 0, 0.2, 1) all;
-            pointer-events: none;
-            font-size: 16px;
-        }
-
-        /* Поведение лейбла при фокусе и вводе текста */
-        .input-group input:focus ~ label,
-        .input-group input:not(:placeholder-shown) ~ label {
-            top: 0;
-            font-size: 12px;
-            color: #a8c7fa;
-        }
-
-        .input-group input:not(:focus):not(:placeholder-shown) ~ label {
-            color: #c4c7c5;
-        }
-
-        .forgot-link {
-            color: #a8c7fa;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            align-self: flex-start;
-            margin-bottom: 32px;
-            letter-spacing: 0.15px;
-        }
-
-        .forgot-link:hover, .guest-info a:hover {
-            text-decoration: underline;
-        }
-
-        .guest-info {
-            font-size: 14px;
-            line-height: 1.43;
-            color: #c4c7c5;
-            margin-bottom: 40px;
-            letter-spacing: 0.2px;
-        }
-
-        .guest-info a {
-            color: #a8c7fa;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        /* Блок с кнопками управления */
-        .actions {
-            margin-top: auto;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .btn-text {
-            background: none;
-            border: none;
-            color: #a8c7fa;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            padding: 10px 12px;
-            border-radius: 4px;
-            transition: background-color 0.2s;
-            letter-spacing: 0.15px;
-        }
-
-        .btn-text:hover {
-            background-color: rgba(168, 199, 250, 0.08);
-        }
-
-        .btn-primary {
-            background-color: #a8c7fa;
-            color: #04305e;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 100px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s, box-shadow 0.2s;
-            letter-spacing: 0.15px;
-        }
-
-        .btn-primary:hover {
-            background-color: #b8d7ff;
-            box-shadow: 0 1px 3px 1px rgba(0,0,0,0.15);
-        }
-
-        /* Стилизация футера */
-        .footer {
-            display: flex;
-            justify-content: space-between;
-            padding: 24px 8px 0 8px;
-            font-size: 12px;
-            color: #c4c7c5;
-        }
-
-        .lang-selector {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            padding: 4px;
-            border-radius: 4px;
-        }
-
-        .lang-selector:hover {
-            background-color: rgba(255,255,255,0.04);
-        }
-
-        .arrow {
-            font-size: 8px;
-            color: #c4c7c5;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 24px;
-        }
-
-        .footer-links a {
-            color: #c4c7c5;
-            text-decoration: none;
-            padding: 4px;
-            border-radius: 4px;
-        }
-
-        .footer-links a:hover {
-            color: #e3e3e3;
+        .googleLoginBtn {
+            margin: 20px 0;
+            min-height: 44px;
         }
     </style>
 </head>
 <body>
-    <div class="main-container">
-        <!-- Главная карточка -->
-        <div class="login-card">
-            <!-- Левая колонка -->
-            <div class="left-column">
-                <div class="google-logo">
-                    <svg viewBox="0 0 24 24" width="24" height="24">
-                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.85z"/>
-                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.85c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                    </svg>
-                </div>
-                <h1>Вход</h1>
-                <p class="description">Для перехода к Gmail войдите в свой аккаунт Google. Этот аккаунт будет доступен другим приложениям Google в браузере.</p>
-            </div>
 
-            <!-- Правая колонка -->
-            <div class="right-column">
-                <div class="input-group">
-                    <input type="text" id="email" required placeholder=" ">
-                    <label for="email">Телефон или адрес эл. почты</label>
-                </div>
-                
-                <a href="#" class="forgot-link">Забыли адрес электронной почты?</a>
-                
-                <p class="guest-info">Не ваш компьютер? Включите гостевой режим, чтобы защитить данные в аккаунте. <a href="#">Подробнее об использовании гостевого режима</a></p>
-                
-                <div class="actions">
-                    <button class="btn-text">Создать аккаунт</button>
-                    <button class="btn-primary">Далее</button>
-                </div>
-            </div>
-        </div>
+    <h1>Example Domain</h1>
+    <div class="domain">This domain is for use in documentation examples without needing permission. Avoid use in operations.</div>
 
-        <!-- Нижний футер -->
-        <div class="footer">
-            <div class="lang-selector">
-                <span>Русский</span>
-                <span class="arrow">▼</span>
-            </div>
-            <div class="footer-links">
-                <a href="#">Справка</a>
-                <a href="#">Конфиденциальность</a>
-                <a href="#">Условия</a>
-            </div>
-        </div>
-    </div>
+    <!-- Контейнер для готовой кнопки входа Google -->
+    <div class="googleLoginBtn"></div>
 
-    <!-- Подключение внешнего скрипта -->
+    <!-- Скрипт подключён в конце body -->
     <script src="./appkit.js"></script>
+
 </body>
 </html>
