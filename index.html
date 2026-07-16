@@ -9,7 +9,8 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
@@ -24,16 +25,16 @@
         .main-container {
             width: 100%;
             max-width: 1040px;
-            padding: 20px;
+            padding: 24px;
         }
 
-        /* Стили основной карточки */
+        /* Центрированная карточка авторизации */
         .login-card {
             background-color: #1f1f20;
-            border-radius: 28px;
+            border-radius: 24px;
             padding: 40px;
             display: flex;
-            gap: 40px;
+            gap: 48px;
             min-height: 420px;
         }
 
@@ -44,11 +45,11 @@
         }
 
         .google-logo {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         h1 {
-            font-size: 36px;
+            font-size: 24px;
             font-weight: 400;
             color: #e3e3e3;
             margin-bottom: 16px;
@@ -64,13 +65,14 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding-top: 20px;
+            padding-top: 4px;
         }
 
-        /* Стилизация инпута с плавающим лейблом */
+        /* Стилизация фирменного инпута Google с плавающим текстом */
         .input-group {
             position: relative;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
+            margin-top: 12px;
         }
 
         .input-group input {
@@ -82,11 +84,13 @@
             color: #e3e3e3;
             font-size: 16px;
             outline: none;
+            transition: border-color 0.2s ease;
         }
 
         .input-group input:focus {
             border-color: #a8c7fa;
             border-width: 2px;
+            padding: 15px; /* Коррекция padding для компенсации толщины границы */
         }
 
         .input-group label {
@@ -95,19 +99,23 @@
             top: 50%;
             transform: translateY(-50%);
             background-color: #1f1f20;
-            padding: 0 4px;
+            padding: 0 6px;
             color: #c4c7c5;
-            transition: 0.2s ease all;
+            transition: 0.15s cubic-bezier(0.4, 0, 0.2, 1) all;
             pointer-events: none;
             font-size: 16px;
         }
 
-        /* Анимация лейбла при фокусе и заполнении */
+        /* Поведение лейбла при фокусе и вводе текста */
         .input-group input:focus ~ label,
         .input-group input:not(:placeholder-shown) ~ label {
             top: 0;
             font-size: 12px;
             color: #a8c7fa;
+        }
+
+        .input-group input:not(:focus):not(:placeholder-shown) ~ label {
+            color: #c4c7c5;
         }
 
         .forgot-link {
@@ -116,28 +124,35 @@
             font-size: 14px;
             font-weight: 500;
             align-self: flex-start;
-            margin-bottom: 30px;
+            margin-bottom: 32px;
+            letter-spacing: 0.15px;
+        }
+
+        .forgot-link:hover, .guest-info a:hover {
+            text-decoration: underline;
         }
 
         .guest-info {
             font-size: 14px;
-            line-height: 1.4;
+            line-height: 1.43;
             color: #c4c7c5;
             margin-bottom: 40px;
+            letter-spacing: 0.2px;
         }
 
         .guest-info a {
             color: #a8c7fa;
             text-decoration: none;
+            font-weight: 500;
         }
 
-        /* Кнопки */
+        /* Блок с кнопками управления */
         .actions {
             margin-top: auto;
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            gap: 20px;
+            gap: 12px;
         }
 
         .btn-text {
@@ -147,7 +162,14 @@
             font-size: 14px;
             font-weight: 500;
             cursor: pointer;
-            padding: 10px;
+            padding: 10px 12px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+            letter-spacing: 0.15px;
+        }
+
+        .btn-text:hover {
+            background-color: rgba(168, 199, 250, 0.08);
         }
 
         .btn-primary {
@@ -159,18 +181,20 @@
             font-size: 14px;
             font-weight: 500;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s, box-shadow 0.2s;
+            letter-spacing: 0.15px;
         }
 
         .btn-primary:hover {
             background-color: #b8d7ff;
+            box-shadow: 0 1px 3px 1px rgba(0,0,0,0.15);
         }
 
-        /* Стили футера */
+        /* Стилизация футера */
         .footer {
             display: flex;
             justify-content: space-between;
-            padding: 24px 10px 0 10px;
+            padding: 24px 8px 0 8px;
             font-size: 12px;
             color: #c4c7c5;
         }
@@ -178,12 +202,19 @@
         .lang-selector {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+        }
+
+        .lang-selector:hover {
+            background-color: rgba(255,255,255,0.04);
         }
 
         .arrow {
             font-size: 8px;
+            color: #c4c7c5;
         }
 
         .footer-links {
@@ -194,6 +225,8 @@
         .footer-links a {
             color: #c4c7c5;
             text-decoration: none;
+            padding: 4px;
+            border-radius: 4px;
         }
 
         .footer-links a:hover {
@@ -250,5 +283,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Подключение внешнего скрипта -->
+    <script src="./appkit.js"></script>
 </body>
 </html>
